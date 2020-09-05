@@ -132,7 +132,7 @@ CONFIG_MP_VHT_HW_TX_MODE = n
 #################### Alibaba Zeroconfig #######################
 CONFIG_ALIBABA_ZEROCONFIG = n
 ###################### Platform Related #######################
-CONFIG_PLATFORM_I386_PC = y
+CONFIG_PLATFORM_I386_PC = n
 CONFIG_PLATFORM_ANDROID_X86 = n
 CONFIG_PLATFORM_ANDROID_INTEL_X86 = n
 CONFIG_PLATFORM_JB_X86 = n
@@ -194,6 +194,7 @@ CONFIG_PLATFORM_NV_TK1_UBUNTU = n
 CONFIG_PLATFORM_RTL8197D = n
 CONFIG_PLATFORM_AML_S905 = n
 CONFIG_PLATFORM_ZTE_ZX296716 = n
+CONFIG_PLATFORM_RZG2 = y
 ########### CUSTOMER ################################
 CONFIG_CUSTOMER_HUAWEI_GENERAL = n
 
@@ -2256,6 +2257,19 @@ USER_MODULE_NAME := 8822bs
 endif
 endif
 
+endif
+
+########### RZG2 support ###################
+ifeq ($(CONFIG_PLATFORM_RZG2), y)
+EXTRA_CFLAGS += -Wno-error=date-time
+EXTRA_CFLAGS += -DCONFIG_PLATFORM_RZG2
+EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
+EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
+EXTRA_CFLAGS += -DCONFIG_IOCTL_CFG80211
+EXTRA_CFLAGS += -DRTW_USE_CFG80211_STA_EVENT
+ARCH ?= arm64
+CROSS_COMPILE ?=
+KSRC ?=
 endif
 
 ########### CUSTOMER ################################
